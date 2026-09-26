@@ -84,6 +84,14 @@ def cmd_atlante(args):
             print(f)
 
 
+def cmd_volto(args):
+    from .volto.tavole import render_face_plate
+    for f in render_face_plate(args.tavola, args.uscita, views=args.viste, width=args.risoluzione,
+                               samples=args.campioni, spacing=args.voxel, lang=args.lingua,
+                               device=args.dispositivo):
+        print(f)
+
+
 def main(argv=None):
     from .pipeline import PLATES, VIEW_NAMES
 
@@ -106,6 +114,17 @@ def main(argv=None):
     _common(sp)
     _render_args(sp)
     sp.set_defaults(func=cmd_atlante)
+
+    sp = sub.add_parser("volto", help="tavole del volto intero (anatomia BodyParts3D)")
+    sp.add_argument("tavola", choices=["volto_cute", "volto_emidissezione", "volto_muscoli"])
+    sp.add_argument("--viste", nargs="+", choices=VIEW_NAMES)
+    sp.add_argument("--uscita", default="output", type=Path)
+    sp.add_argument("--risoluzione", type=int, default=1400)
+    sp.add_argument("--campioni", type=int, default=64)
+    sp.add_argument("--voxel", type=float, default=0.6)
+    sp.add_argument("--lingua", default="it", choices=["it", "en"])
+    sp.add_argument("--dispositivo", default="cpu", choices=["cpu", "gpu"])
+    sp.set_defaults(func=cmd_volto)
 
     args = ap.parse_args(argv)
     try:

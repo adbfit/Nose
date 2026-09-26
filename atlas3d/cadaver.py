@@ -322,3 +322,46 @@ def photo_color_management():
     except TypeError:
         pass
     view.exposure = -0.2
+
+
+def muscle_material(name: str, axis, seed: float = 0.0):
+    """Skeletal muscle with striations running along `axis` (unit vector, atlas coordinates)."""
+    from mathutils import Matrix
+    t = TISSUES["smas"]
+    t = Tissue(**{**t.__dict__, "fibers": None})
+    mat = tissue_material(name, t, seed=seed)
+    nt = mat.node_tree
+    links = nt.links
+    a = np.asarray(axis, float)
+    a /= np.linalg.norm(a)
+    n = np.array([0.0, 1.0, 0.0])
+    u = np.cross(a, n)
+    if np.linalg.norm(u) < 1e-3:
+        u = np.cross(a, [1.0, 0.0, 0.0])
+    u /= np.linalg.norm(u)
+    w = np.cross(u, a)
+    rot = Matrix([list(u), list(a), list(w)]).to_euler()
+    tc = nt.nodes.new("ShaderNodeTexCoord")
+    mp = nt.nodes.new("ShaderNodeMapping")
+    mp.inputs["Rotation"].default_value = rot
+    mp.inputs["Scale"].default_value = (1.0 / (0.30 * MM),) * 3
+    links.new(tc.outputs["Object"], mp.inputs["Vector"])
+    wave = nt.nodes.new("ShaderNodeTexWave")
+    wave.wave_type = "BANDS"
+    wave.bands_direction = "X"
+    wave.inputs["Distortion"].default_value = 1.5
+    wave.inputs["Detail"].default_value = 4.0
+    links.new(mp.outputs["Vector"], wave.inputs["Vector"])
+    bump = nt.nodes.new("ShaderNodeBump")
+    bump.inputs["Strength"].default_value = 0.6
+    bump.inputs["Distance"].default_value = 0.08 * MM
+    links.new(wave.outputs["Fac"], bump.inputs["Height"])
+    bsdf = nt.nodes["Principled BSDF"]
+    links.new(bump.outputs["Normal"], bsdf.inputs["Normal"])
+    return mat
+
+
+TISSUES["tooth"] = Tissue([(0.93, 0.90, 0.80), (0.88, 0.84, 0.70)], variation_mm=2.0, sss=0.5,
+                          sss_radius=(1.0, 0.9, 0.7), sss_mm=0.8, roughness=(0.15, 0.3), wet=0.5)
+TISSUES["eye"] = Tissue([(0.52, 0.49, 0.45), (0.42, 0.40, 0.37), (0.58, 0.55, 0.50)], variation_mm=3.0,
+                        sss=0.4, sss_radius=(1.0, 0.8, 0.7), sss_mm=1.0, roughness=(0.25, 0.45), wet=0.4)

@@ -44,6 +44,34 @@ Ogni tavola cadaverica produce `nome.png` (immagine pulita) e `nome_etichette.pn
 
 Esempi renderizzati nella cartella [`esempi/`](esempi/).
 
+### Volto intero (`python -m atlas3d volto ...`)
+
+Per il volto intero la geometria non è procedurale: viene da **BodyParts3D** (DBCLS, licenza
+CC BY-SA 2.1 JP), un atlante 3D aperto ricavato dalla segmentazione di dati anatomici reali. Si
+usano cute, scheletro facciale, cartilagini nasali, bulbi oculari, denti e 30 muscoli mimici e
+masticatori. Le mesh si scaricano automaticamente da GitHub alla prima esecuzione (circa 130 MB,
+cache in `~/.cache/atlas3d`).
+
+- **derma e grasso sottocutaneo**, che BodyParts3D non segmenta, sono calcolati come lo spazio
+  tra la cute e muscoli e ossa (distanza esatta dalla mesh cutanea con libigl);
+- **arterie** (facciale/angolare, labiali, nasale laterale, dorsale del naso, sopratrocleare,
+  sopraorbitaria), tracciate sui punti di repere di questa testa alla profondità misurata in
+  letteratura: a. facciale 9,7 mm alla commissura e 2,4 mm al canto mediale (Trzeciak 2025),
+  diametro da 2,14 a 1,46 mm (Pourani 2025); aa. sopratrocleare e sopraorbitaria 3,3-3,5 mm
+  (Cotofana 2020), distanza dalla linea mediana secondo Kliniec 2024.
+
+| Tavola | Contenuto |
+|---|---|
+| `volto_cute` | volto a cute integra con telo fenestrato |
+| `volto_emidissezione` | emivolto sinistro senza cute e sottocutaneo: muscoli mimici, arterie, scheletro; emivolto destro integro |
+| `volto_muscoli` | dissezione di tutto il volto sul piano muscolare, con arterie |
+
+```bash
+python -m atlas3d volto volto_emidissezione --viste obliqua frontale --risoluzione 2400 --campioni 256
+```
+
+Anche queste tavole producono le mappe di controllo per `genera_foto.py`.
+
 ### Dalla ricostruzione alla fotografia (pipeline ibrida)
 
 Il path tracing da solo dà immagini realistiche ma ancora riconoscibili come rendering. Per
