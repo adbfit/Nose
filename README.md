@@ -44,6 +44,37 @@ Ogni tavola cadaverica produce `nome.png` (immagine pulita) e `nome_etichette.pn
 
 Esempi renderizzati nella cartella [`esempi/`](esempi/).
 
+### Dalla ricostruzione alla fotografia (pipeline ibrida)
+
+Il path tracing da solo dà immagini realistiche ma ancora riconoscibili come rendering. Per
+arrivare alla resa di una **fotografia di dissezione** c'è un secondo passaggio con un modello
+generativo (Stable Diffusion XL fotorealistico). Il modello non inventa l'anatomia: parte dal
+render (img2img) ed è vincolato da due ControlNet.
+
+```
+parametri dalla letteratura ──► modello 3D (atlas3d) ──► render Cycles ─┐
+                                        │                                ├─► SDXL + ControlNet ──► foto
+                                        └─► profondità + contorni ───────┘         │
+                                                                                   └─► verifica: contorni
+                                                                                       sovrapposti + coerenza
+                                                                                       colore per tessuto
+```
+
+1. `python -m atlas3d tavola cadavere_smas ...` salva, accanto all'immagine, le mappe
+   `_depth.png`, `_edges.png` e `_seg.png` e il file `_controllo.json` (prompt costruito dai
+   tessuti visibili, posizioni delle etichette).
+2. `python genera_foto.py esempi/cadavere_smas_obliqua_controllo.json --varianti 4` genera le
+   varianti fotografiche. Serve una GPU CUDA; in alternativa si usa il notebook
+   [`genera_foto_colab.ipynb`](genera_foto_colab.ipynb) su Google Colab (GPU gratuita). Se il
+   repository è privato, caricare su Colab la cartella del progetto invece di clonarla.
+3. Per ogni variante escono `_foto_vN.png`, `_foto_vN_etichette.png` e `_foto_vN_verifica.png`
+   (contorni anatomici del modello sovrapposti), più `_foto_report.json`, che segnala i tessuti
+   il cui colore si discosta troppo dal render e va quindi controllato a occhio.
+
+`--forza` regola il compromesso: 0.35-0.45 resta molto fedele al modello, 0.6-0.7 dà una resa
+più fotografica ma lascia più libertà al generatore. Le immagini generative vanno sempre
+riviste da un anatomista e dichiarate come ricostruzioni.
+
 ### Installazione
 
 Serve Python 3.11: il pacchetto `bpy` 4.2 (Blender come modulo) è distribuito solo per questa versione.

@@ -191,7 +191,8 @@ def provenance(params: Params, model: NoseModel, plate_name: str, plate: Plate, 
 
 def render_plate(params: Params, plate_name: str, out_dir: Path, *, views=None, width=1800,
                  height=None, samples=192, spacing=0.3, lang="it", labels=True,
-                 background="dark", export_glb=False, seed=7, device="cpu") -> list[Path]:
+                 background="dark", export_glb=False, seed=7, device="cpu",
+                 control_maps=True) -> list[Path]:
     from . import render as R  # bpy is imported lazily so that the core stays usable without it
     from .labels import annotate
 
@@ -277,7 +278,7 @@ def render_plate(params: Params, plate_name: str, out_dir: Path, *, views=None, 
 
         final = out_dir / f"{stem}.png"
         label_items = []
-        if labels:
+        if labels or cadaver:
             for key in plate.labels:
                 if key in ("angular", "lateral_nasal", "dorsal_nasal", "columellar"):
                     cands = [v for v in vessels if v["label"] == key]
@@ -315,6 +316,24 @@ def render_plate(params: Params, plate_name: str, out_dir: Path, *, views=None, 
                                               encoding="utf-8")
         if export_glb:
             R.export_gltf(str(out_dir / f"{stem}.glb"))
+        if cadaver and control_maps:
+            from . import cadaver as C
+            from . import control as K
+            tissues = {n: C.STRUCTURE_TISSUE[n] for n in meshes}
+            maps = K.render_control_maps(out_dir / stem, tissues)
+            visible = []
+            for n in meshes:
+                surf, cutname = C.STRUCTURE_TISSUE[n]
+                visible.append(surf)
+                if cut_faces[n].any():
+                    visible.append(cutname)
+            if vessels:
+                visible.append("artery")
+            prompt = K.build_prompt(list(dict.fromkeys(visible)), TITLES["en"][plate_name].lower(), view)
+            K.write_manifest(out_dir / stem, maps, prompt,
+                             [[n, [float(xy[0]), float(xy[1]), float(xy[2])]] for n, xy in items],
+                             TITLES[lang][plate_name], refs_short)
+            log(f"mappe di controllo {stem}: {', '.join(maps.values())}")
     return written
 
 

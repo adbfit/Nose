@@ -383,22 +383,32 @@ class NoseModel:
         X, Y, Z = self._grid_xyz(f.grid)
         B = self._filler_field(f.grid)
 
-        def boundary(frac):
-            depth = T * frac
+        # Layer thicknesses follow the fractions, with a floor so that thin regions (rhinion)
+        # keep every layer of Letourneau & Daniel visible; the framework stays at depth T.
+        def boundary_abs(depth):
             b = S + depth
             if B is not None:
                 b = sdf.smin(b, B - (T - depth), 2.0)
             return b
 
+        floors = {"skin": 0.7, "superficial_fat": 0.45, "smas": 0.55}
+        acc = np.zeros_like(T)
+        depth_abs = [acc.copy()]
+        for k in LAYER_ORDER[:3]:
+            lo, hi = self.depth_frac[k]
+            acc = acc + np.maximum((hi - lo) * T, floors[k])
+            depth_abs.append(acc.copy())
+        frame_depth = np.maximum(T * self.depth_frac["periosteum"][0], acc + 0.35)
+        depth_abs += [frame_depth, frame_depth]
+        bnd = [boundary_abs(d) for d in depth_abs]
         depths = [self.depth_frac[k][0] for k in LAYER_ORDER] + [1.0]
-        bnd = [boundary(d) for d in depths]
         vols = f.volumes
         vols["skin"] = np.maximum(bnd[0], -bnd[1])
         vols["superficial_fat"] = np.maximum(bnd[1], -bnd[2])
         vols["smas"] = np.maximum(bnd[2], -bnd[3])
         deep = np.maximum(bnd[3], -bnd[4])   # periosteum is merged into the framework shell
 
-        outer = S + T * depths[4]          # top of the osteocartilaginous framework
+        outer = S + frame_depth            # top of the osteocartilaginous framework
         L = self.L
         t_r = p["morphology.rhinion_position"]
         t_s = p["framework.scroll_position"]

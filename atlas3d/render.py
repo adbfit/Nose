@@ -374,6 +374,7 @@ def setup_camera(target_mm, view: str, frame_mm: float, lens_mm: float = 105.0,
     # distance so that frame_mm fits the sensor width
     dist = (lens_mm / 36.0) * frame_mm * MM
     obj = bpy.data.objects.new("camera", cam)
+    obj["target_distance"] = float(dist)
     tgt = np.asarray(target_mm) * MM
     obj.location = tuple(tgt + direction * dist)
     obj.rotation_euler = (Vector(tuple(tgt)) - obj.location).to_track_quat("-Z", "Y").to_euler()
