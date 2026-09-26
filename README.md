@@ -103,6 +103,22 @@ parametri dalla letteratura ──► modello 3D (atlas3d) ──► render Cycl
 più fotografica ma lascia più libertà al generatore. Le immagini generative vanno sempre
 riviste da un anatomista e dichiarate come ricostruzioni.
 
+### Generatore di prompt anatomico
+
+`python -m atlas3d prompt` compone il prompt da una piccola base di conoscenza anatomica invece
+di scriverlo a mano. Il prompt contiene la preparazione del preparato, il piano di dissezione e le
+strutture visibili dalla superficie alla profondità, ciascuna con aspetto e rapporti anatomici. Vi
+entrano anche i dati di letteratura che cambiano la rappresentazione (decorso e profondità delle
+arterie), più i vincoli di fedeltà. Con `--modifica` o `--da-manifest` aggiunge le istruzioni per
+conservare esattamente il render allegato.
+
+```bash
+python -m atlas3d prompt --da-manifest esempi/volto_emidissezione_obliqua_controllo.json --modello gpt
+python -m atlas3d prompt --tavola cadavere_smas --vista frontale --modello midjourney --modifica
+```
+
+Modelli supportati: `gpt` (GPT Image), `nanobanana` (Gemini), `midjourney`, `sdxl`, `flux`.
+
 ### Con Midjourney
 
 `python midjourney_kit.py prepara esempi/` crea la cartella `midjourney/`, con una sottocartella

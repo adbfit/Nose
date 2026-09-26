@@ -84,6 +84,25 @@ def cmd_atlante(args):
             print(f)
 
 
+def cmd_prompt(args):
+    import json as _json
+    from .prompt_anatomico import da_manifest, genera
+    p = da_manifest(args.da_manifest, args.modello) if args.da_manifest else \
+        genera(args.tavola, args.vista, args.modello, args.modifica)
+    if args.json:
+        print(_json.dumps(p.as_dict(), indent=2, ensure_ascii=False))
+        return
+    print(p.text)
+    if p.negative:
+        print("\nNEGATIVE:", p.negative)
+    if p.params:
+        print("\nPARAMETRI:", p.params)
+    if p.facts:
+        print("\nDATI DI LETTERATURA USATI:")
+        for f, r in p.facts:
+            print(f"  - {f} [{r}]")
+
+
 def cmd_volto(args):
     from .volto.tavole import render_face_plate
     for f in render_face_plate(args.tavola, args.uscita, views=args.viste, width=args.risoluzione,
@@ -114,6 +133,15 @@ def main(argv=None):
     _common(sp)
     _render_args(sp)
     sp.set_defaults(func=cmd_atlante)
+
+    sp = sub.add_parser("prompt", help="generatore di prompt anatomici per modelli di immagini")
+    sp.add_argument("--tavola", default="volto_emidissezione")
+    sp.add_argument("--vista", default="obliqua")
+    sp.add_argument("--modello", default="gpt", choices=["gpt", "nanobanana", "midjourney", "sdxl", "flux"])
+    sp.add_argument("--modifica", action="store_true", help="il render atlas3d viene allegato come riferimento")
+    sp.add_argument("--da-manifest", type=Path, help="file *_controllo.json di una tavola renderizzata")
+    sp.add_argument("--json", action="store_true")
+    sp.set_defaults(func=cmd_prompt)
 
     sp = sub.add_parser("volto", help="tavole del volto intero (anatomia BodyParts3D)")
     sp.add_argument("tavola", choices=["volto_cute", "volto_emidissezione", "volto_muscoli"])
