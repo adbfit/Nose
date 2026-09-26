@@ -1,0 +1,347 @@
+{
+  "plate": "cadavere_smas",
+  "generated": "2026-09-26 10:04:04",
+  "overrides": {},
+  "profile_check": {
+    "nasal_length": 47.0,
+    "nasofrontal_angle": 128.0,
+    "nasolabial_angle": 102.0,
+    "goode_ratio": 0.58
+  },
+  "parameters": {
+    "morphology.nasal_length": {
+      "value": 47.0,
+      "unit": "mm",
+      "evidence": "qualitative",
+      "refs": [
+        "farkas2005"
+      ],
+      "note": "Farkas 2005 fornisce norme di altezza/larghezza nasale per etnia; il valore è una stima per adulto caucasico, da sostituire con la norma del campione."
+    },
+    "morphology.nasal_height": {
+      "value": 50.0,
+      "unit": "mm",
+      "evidence": "qualitative",
+      "refs": [
+        "farkas2005"
+      ]
+    },
+    "morphology.alar_width": {
+      "value": 33.0,
+      "unit": "mm",
+      "evidence": "qualitative",
+      "refs": [
+        "farkas2005",
+        "ballin2017"
+      ],
+      "note": "Farkas 2005: naso significativamente più largo nei gruppi asiatici e africani rispetto ai nord-americani bianchi."
+    },
+    "morphology.dorsal_width": {
+      "value": 11.0,
+      "unit": "mm",
+      "evidence": "illustrative",
+      "refs": []
+    },
+    "morphology.nasofrontal_angle": {
+      "value": 128.0,
+      "unit": "deg",
+      "evidence": "convention",
+      "refs": [
+        "ballin2017"
+      ],
+      "note": "Ideale estetico comunemente citato 115-135°. Ballin 2017 riporta angoli nasofrontali più ottusi dell'ideale nel campione e minori negli uomini."
+    },
+    "morphology.nasolabial_angle": {
+      "value": 102.0,
+      "unit": "deg",
+      "evidence": "convention",
+      "refs": [
+        "ballin2017"
+      ],
+      "note": "Ideale 90-110° circa; Ballin 2017: angolo nasolabiale del campione simile all'ideale (p=0.07)."
+    },
+    "morphology.goode_ratio": {
+      "value": 0.58,
+      "unit": "ratio",
+      "evidence": "convention",
+      "refs": [
+        "ballin2017"
+      ],
+      "note": "Ideale di Goode 0.55-0.60; Ballin 2017: proiezione maggiore dell'ideale nel campione e maggiore negli uomini."
+    },
+    "morphology.dorsal_hump": {
+      "value": 0.0,
+      "unit": "mm",
+      "evidence": "illustrative",
+      "refs": []
+    },
+    "morphology.supratip_break": {
+      "value": 1.2,
+      "unit": "mm",
+      "evidence": "illustrative",
+      "refs": []
+    },
+    "morphology.tip_width": {
+      "value": 9.0,
+      "unit": "mm",
+      "evidence": "illustrative",
+      "refs": []
+    },
+    "morphology.rhinion_position": {
+      "value": 0.42,
+      "unit": "fraction",
+      "evidence": "qualitative",
+      "refs": [
+        "lessard1985"
+      ]
+    },
+    "soft_tissue.thickness_nasion": {
+      "value": 6.0,
+      "unit": "mm",
+      "evidence": "qualitative",
+      "refs": [
+        "lessard1985"
+      ],
+      "note": "Lessard & Daniel: cute più spessa al nasion e più sottile al rhinion; valore numerico da verificare sul testo integrale."
+    },
+    "soft_tissue.thickness_rhinion": {
+      "value": 2.2,
+      "unit": "mm",
+      "evidence": "qualitative",
+      "refs": [
+        "lessard1985"
+      ]
+    },
+    "soft_tissue.thickness_supratip": {
+      "value": 3.6,
+      "unit": "mm",
+      "evidence": "qualitative",
+      "refs": [
+        "lessard1985"
+      ]
+    },
+    "soft_tissue.thickness_tip": {
+      "value": 3.0,
+      "unit": "mm",
+      "evidence": "qualitative",
+      "refs": [
+        "lessard1985"
+      ]
+    },
+    "soft_tissue.thickness_face": {
+      "value": 7.0,
+      "unit": "mm",
+      "evidence": "illustrative",
+      "refs": []
+    },
+    "soft_tissue.layer_fractions": {
+      "value": {
+        "skin": 0.34,
+        "superficial_fat": 0.22,
+        "smas": 0.18,
+        "deep_fat": 0.2,
+        "periosteum": 0.06
+      },
+      "unit": "fraction",
+      "evidence": "qualitative",
+      "refs": [
+        "letourneau1988"
+      ],
+      "note": "La sequenza degli strati è dalla fonte; le proporzioni sono illustrative."
+    },
+    "framework.bone_thickness": {
+      "value": 2.4,
+      "unit": "mm",
+      "evidence": "illustrative",
+      "refs": []
+    },
+    "framework.cartilage_thickness": {
+      "value": 1.0,
+      "unit": "mm",
+      "evidence": "illustrative",
+      "refs": [
+        "lessard1985"
+      ]
+    },
+    "framework.scroll_position": {
+      "value": 0.72,
+      "unit": "fraction",
+      "evidence": "qualitative",
+      "refs": [
+        "lessard1985"
+      ]
+    },
+    "vasculature.arterial_plane": {
+      "value": "superficial_to_smas",
+      "unit": "enum",
+      "evidence": "measured",
+      "refs": [
+        "toriumi1996"
+      ],
+      "note": "Toriumi 1996 (15 cadaveri): le principali arterie decorrono nello strato muscoloaponeurotico o superficialmente ad esso."
+    },
+    "vasculature.dorsal_nasal_pattern": {
+      "value": "bilateral",
+      "unit": "enum",
+      "evidence": "measured",
+      "refs": [
+        "tansatit2021",
+        "alfertshofer2022"
+      ],
+      "note": "Tansatit 2021 (60 cadaveri): bilaterale 53.3%, plesso 38.3%, singola dominante vicino alla linea mediana 8.3%."
+    },
+    "vasculature.lateral_nasal_diameter": {
+      "value": 1.0,
+      "unit": "mm",
+      "evidence": "measured",
+      "refs": [
+        "jiang2020"
+      ],
+      "note": "Jiang 2020 (angiografia, n=20): diametro medio 1.0 ± 0.20 mm."
+    },
+    "vasculature.dorsal_nasal_diameter": {
+      "value": 0.8,
+      "unit": "mm",
+      "evidence": "illustrative",
+      "refs": []
+    },
+    "vasculature.columellar_diameter": {
+      "value": 0.5,
+      "unit": "mm",
+      "evidence": "illustrative",
+      "refs": []
+    },
+    "vasculature.columellar_depth": {
+      "value": 2.7,
+      "unit": "mm",
+      "evidence": "measured",
+      "refs": [
+        "ortizmiddleton2025"
+      ],
+      "note": "Doppler (n=50): 2.42 ± 0.34 mm a sinistra, 3.03 ± 0.37 mm a destra."
+    },
+    "vasculature.angular_depth": {
+      "value": 4.4,
+      "unit": "mm",
+      "evidence": "measured",
+      "refs": [
+        "ortizmiddleton2025"
+      ],
+      "note": "Doppler: 4.65 ± 0.48 mm a sinistra, 4.08 ± 0.53 mm a destra."
+    },
+    "vasculature.angular_diameter": {
+      "value": 1.4,
+      "unit": "mm",
+      "evidence": "illustrative",
+      "refs": []
+    },
+    "filler.enabled": {
+      "value": false,
+      "unit": "bool"
+    },
+    "filler.site": {
+      "value": 0.12,
+      "unit": "fraction"
+    },
+    "filler.volume": {
+      "value": 0.3,
+      "unit": "ml"
+    },
+    "filler.plane": {
+      "value": "supraperiosteal",
+      "unit": "enum",
+      "evidence": "qualitative",
+      "refs": [
+        "vasconcelosberg2024",
+        "alfertshofer2022"
+      ],
+      "note": "Il piano profondo sopraperiosteo/sopracondrale sulla linea mediana è quello solitamente raccomandato; l'arteria dorsale nasale può tuttavia trovarsi entro 1 mm dal periostio nel 10% dei casi (Ortiz Middleton 2025)."
+    }
+  },
+  "plate_references": {
+    "toriumi1996": {
+      "citation": "Toriumi DM, Mueller RA, Grosch T, Bhattacharyya TK, Larrabee WF. Vascular anatomy of the nose and the external rhinoplasty approach. Arch Otolaryngol Head Neck Surg. 1996;122(1):24-34.",
+      "pmid": "8554743",
+      "doi": "10.1001/archotol.1996.01890130020003"
+    },
+    "letourneau1988": {
+      "citation": "Letourneau A, Daniel RK. The superficial musculoaponeurotic system of the nose. Plast Reconstr Surg. 1988;82(1):48-57.",
+      "pmid": "3380925"
+    },
+    "tansatit2021": {
+      "citation": "Tansatit T, Jitaree B, Uruwan S, Rungsawang C. Anatomical study of the dorsal nasal artery to prevent visual complications during dorsal nasal augmentation. Plast Reconstr Surg Glob Open. 2021;9(11):e3924.",
+      "pmid": "34796083",
+      "doi": "10.1097/GOX.0000000000003924"
+    },
+    "jiang2020": {
+      "citation": "Jiang B, Zhang L, Xu J, Zhang L, Liu H. One-stage reconstruction of the large lower nose defect involving 2 subunits with lateral nasal artery pedicle nasolabial flap. J Craniofac Surg. 2020;31(7):e701-e704.",
+      "pmid": "32604310",
+      "doi": "10.1097/SCS.0000000000006614"
+    },
+    "ortizmiddleton2025": {
+      "citation": "Ortiz Middleton E, Aguilar A. Anatomical mapping of nasal arteries in Chilean patients using Doppler ultrasound: clinical application for injectables. Aesthet Surg J Open Forum. 2025;7:ojaf016.",
+      "pmid": "40255966",
+      "doi": "10.1093/asjof/ojaf016"
+    }
+  },
+  "all_references": {
+    "alfertshofer2022": {
+      "citation": "Alfertshofer MG, Frank K, Moellhoff N, et al. Ultrasound anatomy of the dorsal nasal artery as it relates to liquid rhinoplasty procedures. Facial Plast Surg Clin North Am. 2022;30(2):135-141.",
+      "pmid": "35501050",
+      "doi": "10.1016/j.fsc.2022.01.002"
+    },
+    "ballin2017": {
+      "citation": "Ballin AC, Carvalho B, Dolci JEL, Becker R, Berger C, Mocellin M. Anthropometric study of the caucasian nose in the city of Curitiba: relevance of population evaluation. Braz J Otorhinolaryngol. 2018;84(4):486-493.",
+      "pmid": "28728950",
+      "doi": "10.1016/j.bjorl.2017.06.004"
+    },
+    "farkas2005": {
+      "citation": "Farkas LG, Katic MJ, Forrest CR, et al. International anthropometric study of facial morphology in various ethnic groups/races. J Craniofac Surg. 2005;16(4):615-646.",
+      "pmid": "16077306",
+      "doi": "10.1097/01.scs.0000171847.58031.9e"
+    },
+    "jiang2020": {
+      "citation": "Jiang B, Zhang L, Xu J, Zhang L, Liu H. One-stage reconstruction of the large lower nose defect involving 2 subunits with lateral nasal artery pedicle nasolabial flap. J Craniofac Surg. 2020;31(7):e701-e704.",
+      "pmid": "32604310",
+      "doi": "10.1097/SCS.0000000000006614"
+    },
+    "lessard1985": {
+      "citation": "Lessard ML, Daniel RK. Surgical anatomy of septorhinoplasty. Arch Otolaryngol. 1985;111(1):25-29.",
+      "pmid": "3966894",
+      "doi": "10.1001/archotol.1985.00800030059006"
+    },
+    "letourneau1988": {
+      "citation": "Letourneau A, Daniel RK. The superficial musculoaponeurotic system of the nose. Plast Reconstr Surg. 1988;82(1):48-57.",
+      "pmid": "3380925"
+    },
+    "ortizmiddleton2025": {
+      "citation": "Ortiz Middleton E, Aguilar A. Anatomical mapping of nasal arteries in Chilean patients using Doppler ultrasound: clinical application for injectables. Aesthet Surg J Open Forum. 2025;7:ojaf016.",
+      "pmid": "40255966",
+      "doi": "10.1093/asjof/ojaf016"
+    },
+    "tansatit2021": {
+      "citation": "Tansatit T, Jitaree B, Uruwan S, Rungsawang C. Anatomical study of the dorsal nasal artery to prevent visual complications during dorsal nasal augmentation. Plast Reconstr Surg Glob Open. 2021;9(11):e3924.",
+      "pmid": "34796083",
+      "doi": "10.1097/GOX.0000000000003924"
+    },
+    "toriumi1996": {
+      "citation": "Toriumi DM, Mueller RA, Grosch T, Bhattacharyya TK, Larrabee WF. Vascular anatomy of the nose and the external rhinoplasty approach. Arch Otolaryngol Head Neck Surg. 1996;122(1):24-34.",
+      "pmid": "8554743",
+      "doi": "10.1001/archotol.1996.01890130020003"
+    },
+    "vasconcelosberg2024": {
+      "citation": "Vasconcelos-Berg R, Desyatnikova S, Bonavia P, et al. Best practices for the use of high-frequency ultrasound to guide aesthetic filler injections - Part 2: middle third of the face, nose, and tear troughs. Diagnostics (Basel). 2024;14(22):2544.",
+      "pmid": "39594210",
+      "doi": "10.3390/diagnostics14222544"
+    }
+  },
+  "disclaimer": "Illustrazione procedurale basata su parametri tratti dalla letteratura. Valori con evidence 'qualitative'/'illustrative' sono stime di modellazione; non rappresenta un singolo paziente né sostituisce la dissezione o l'imaging.",
+  "view": "obliqua",
+  "image": "cadavere_smas_obliqua.png",
+  "samples": 48,
+  "voxel_mm": 0.3,
+  "resolution": [
+    1100,
+    1265
+  ]
+}
