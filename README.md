@@ -103,6 +103,17 @@ parametri dalla letteratura ──► modello 3D (atlas3d) ──► render Cycl
 più fotografica ma lascia più libertà al generatore. Le immagini generative vanno sempre
 riviste da un anatomista e dichiarate come ricostruzioni.
 
+### Con Midjourney
+
+`python midjourney_kit.py prepara esempi/` crea la cartella `midjourney/`, con una sottocartella
+per ogni vista: immagine da caricare, contorni anatomici e `ISTRUZIONI.md` con prompt e parametri.
+Il metodo consigliato è **Editor → Retexture**: Midjourney conserva la composizione del render e
+rifà solo materiali e luce, quindi l'anatomia resta quella del modello.
+
+Scaricata l'immagine, `python midjourney_kit.py verifica <manifest _controllo.json> <immagine>`
+produce la sovrapposizione dei contorni del modello, la versione con etichette e il report di
+coerenza per tessuto.
+
 ### Installazione
 
 Serve Python 3.11: il pacchetto `bpy` 4.2 (Blender come modulo) è distribuito solo per questa versione.
