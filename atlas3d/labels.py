@@ -97,3 +97,20 @@ def annotate(src: Path, dst: Path, *, title: str, items: list, footer_refs: list
               font=f_foot, fill=muted)
     draw.text((int(40 * scale), h + header + int(48 * scale)), note, font=f_foot, fill=muted)
     canvas.save(dst, optimize=True)
+
+
+def photo_finish(src: Path, dst: Path, grain: float = 0.018, vignette: float = 0.28, seed: int = 0):
+    """Macro-photograph finish: gentle vignette, luminance grain and unsharp mask."""
+    import numpy as np
+    from PIL import ImageFilter
+    img = Image.open(src).convert("RGB")
+    a = np.asarray(img).astype(np.float32) / 255.0
+    h, w = a.shape[:2]
+    yy, xx = np.mgrid[0:h, 0:w]
+    r = np.sqrt(((xx - w / 2) / (w / 2)) ** 2 + ((yy - h / 2) / (h / 2)) ** 2) / np.sqrt(2)
+    a *= (1.0 - vignette * r ** 2.2)[..., None]
+    rng = np.random.default_rng(seed)
+    a += rng.normal(0.0, grain, size=(h, w, 1)) * (0.4 + 0.6 * a.mean(axis=2, keepdims=True))
+    out = Image.fromarray((np.clip(a, 0, 1) * 255).astype(np.uint8))
+    out = out.filter(ImageFilter.UnsharpMask(radius=1.2, percent=60, threshold=2))
+    out.save(dst, optimize=True)

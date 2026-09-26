@@ -10,7 +10,29 @@ spessore dei tessuti molli, stratigrafia, impalcatura osteocartilaginea, decorso
 delle arterie. Le immagini sono renderizzate in path tracing (Blender Cycles) con materiali
 fisicamente basati: diffusione sottocutanea (SSS) per cute, grasso, muscolo e cartilagine.
 
-| Tavola | Contenuto | Fonti principali |
+Due stili di resa:
+
+- **`cadavere_*`: dissezioni fotorealistiche.** Le immagini imitano la fotografia macro di
+  preparati fresco-congelati, come quelli degli studi anatomici sui filler nasali: telo
+  fenestrato, finestre di dissezione a margini irregolari, superficie di taglio del derma, grasso
+  lobulato con setti fibrosi, SMAS con fibre orientate (procero sopra il rhinion, nasale trasverso
+  sotto), cartilagine ialina traslucida, arterie iniettate con lattice, tessuti umidi, flash
+  anulare e profondità di campo.
+- **tavole illustrate** (`cute`, `strati`, ...): resa da atlante didattico con sfondo neutro.
+
+Ogni tavola cadaverica produce `nome.png` (immagine pulita) e `nome_etichette.png`
+(con didascalie e fonti).
+
+| Tavola cadaverica | Contenuto | Fonti principali |
+|---|---|---|
+| `cadavere_cute` | regione nasale a cute integra, telo fenestrato | Farkas 2005, Ballin 2017 |
+| `cadavere_smas` | cute e pannicolo rimossi: SMAS con aa. dorsale, nasale laterale, angolare, columellare | Toriumi 1996, Letourneau 1988, Tansatit 2021, Jiang 2020, Ortiz Middleton 2025 |
+| `cadavere_strati` | finestre concentriche: cute, pannicolo, SMAS, grasso profondo, impalcatura | Letourneau & Daniel 1988, Lessard & Daniel 1985 |
+| `cadavere_impalcatura` | "degloving": ossa nasali, cartilagini laterali superiori e alari | Lessard & Daniel 1985 |
+| `cadavere_sezione` | emisezione sagittale paramediana, setto rivestito di mucosa | Letourneau & Daniel 1988 |
+| `cadavere_filler` | emisezione con bolo di filler sopraperiosteo al radix | Vasconcelos-Berg 2024, Alfertshofer 2022, Beleznay 2015 |
+
+| Tavola illustrata | Contenuto | Fonti principali |
 |---|---|---|
 | `cute` | morfologia esterna: frontale, laterale, obliqua, basale | Farkas 2005, Ballin 2017 |
 | `strati` | dissezione a gradini: cute, pannicolo adiposo, SMAS, grasso profondo, impalcatura | Letourneau & Daniel 1988, Lessard & Daniel 1985 |
@@ -35,6 +57,9 @@ pip install -r requirements.txt
 ```bash
 # parametri, livello di evidenza e fonti (PMID/DOI)
 python -m atlas3d parametri
+
+# dissezione fotorealistica ad alta risoluzione (consigliata GPU)
+python -m atlas3d tavola cadavere_smas --viste obliqua frontale --risoluzione 3000 --campioni 256 --voxel 0.2 --dispositivo gpu
 
 # una tavola (tutte le viste previste) oppure viste specifiche
 python -m atlas3d tavola cute --viste laterale obliqua --risoluzione 2400 --campioni 256
@@ -97,6 +122,10 @@ testo integrale o da un proprio campione: basta modificare il YAML o passare `--
 - È una **ricostruzione parametrica idealizzata**, non l'anatomia di un paziente: non sostituisce
   dissezione, imaging o tavole validate da un anatomista. Il file `.json` e il piè di pagina di
   ogni tavola lo dichiarano.
+- Le dissezioni sono **simulate**: materiali, lobuli, fibre e margini sono procedurali. A
+  risoluzione piena l'effetto è fotografico, ma un occhio esperto riconosce che forma e
+  distribuzione dei tessuti sono idealizzate. Le immagini vanno dichiarate come ricostruzioni,
+  non come fotografie di preparati.
 - Le superfici sono modellate, non scansionate. Il realismo dei materiali è alto, ma la forma
   resta più liscia di un naso reale. Il prossimo passo verso l'iperrealismo è sostituire la
   superficie procedurale con mesh segmentate da TC/RM (per esempio con 3D Slicer), mantenendo

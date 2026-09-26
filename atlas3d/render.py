@@ -246,7 +246,8 @@ def reset_scene():
     return scene
 
 
-def add_mesh(mesh: Mesh, material) -> bpy.types.Object:
+def add_mesh(mesh: Mesh, material, material_index: np.ndarray | None = None) -> bpy.types.Object:
+    """Add a triangle mesh. `material` may be a list; `material_index` picks one per face."""
     me = bpy.data.meshes.new(mesh.name)
     verts = (mesh.vertices * MM).astype(np.float32)
     faces = mesh.faces.astype(np.int32)
@@ -257,13 +258,16 @@ def add_mesh(mesh: Mesh, material) -> bpy.types.Object:
     me.polygons.add(len(faces))
     me.polygons.foreach_set("loop_start", np.arange(0, faces.size, 3, dtype=np.int32))
     me.polygons.foreach_set("loop_total", np.full(len(faces), 3, dtype=np.int32))
+    if material_index is not None:
+        me.polygons.foreach_set("material_index", material_index.astype(np.int32))
     me.update(calc_edges=True)
     me.validate()
-    me.polygons.foreach_set("use_smooth", np.ones(len(faces), dtype=bool))
+    me.polygons.foreach_set("use_smooth", np.ones(len(me.polygons), dtype=bool))
     # marching cubes emits inward-facing triangles for our "negative inside" convention
     me.flip_normals()
     obj = bpy.data.objects.new(mesh.name, me)
-    obj.data.materials.append(material)
+    for m in (material if isinstance(material, (list, tuple)) else [material]):
+        obj.data.materials.append(m)
     bpy.context.scene.collection.objects.link(obj)
     return obj
 

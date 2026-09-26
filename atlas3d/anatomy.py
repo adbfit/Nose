@@ -54,9 +54,20 @@ class Cut:
 
 
 @dataclass
+class Window:
+    """Dissection window: removes a structure inside an irregular ellipse drawn on the
+    frontal (x, z) plane, like a layer excised through a skin incision."""
+    center: tuple          # (x, z) in mm
+    radii: tuple           # (a, b) in mm
+    ragged: float = 0.8    # amplitude of the irregular margin (mm)
+    seed: int = 1
+
+
+@dataclass
 class Fields:
     grid: Grid
     volumes: dict = field(default_factory=dict)   # structure -> 3D SDF array
+    uncut: dict = field(default_factory=dict)     # structure -> SDF before cuts/windows
     skin_n: np.ndarray | None = None
     thickness: np.ndarray | None = None
     nose_weight: np.ndarray | None = None
@@ -241,7 +252,8 @@ class NoseModel:
         return Grid(origin=lo, spacing=spacing, shape=shape)
 
     def evaluate(self, spacing: float = 0.35, cut: Cut | None = None,
-                 per_structure_cut: dict | None = None, nose_only=(), progress=None) -> Fields:
+                 per_structure_cut: dict | None = None, nose_only=(), windows: dict | None = None,
+                 detail: bool = False, drape: bool = False, progress=None) -> Fields:
         grid = self.make_grid(spacing)
         nx, ny, nz = grid.shape
         skin = np.empty(grid.shape, np.float32)
@@ -274,8 +286,67 @@ class NoseModel:
         for name in nose_only:
             if name in fields.volumes:
                 fields.volumes[name] = np.maximum(fields.volumes[name], (0.3 - w) * 12.0)
+        if detail:
+            self._add_fat_lobules(fields)
+        if drape:
+            fields.volumes["drape"] = self._drape(fields)
+        fields.uncut = {k: v.copy() for k, v in fields.volumes.items()}
+        self._apply_windows(fields, windows or {})
         self._apply_cuts(fields, cut, per_structure_cut or {})
         return fields
+
+    # ------------------------------------------------------ dissection detail
+    def _noise2d(self, grid: Grid, scale_mm: float, seed: int) -> np.ndarray:
+        """Smooth random field on the (x, z) plane, unit standard deviation, shape (nx, 1, nz)."""
+        rng = np.random.default_rng(seed)
+        nx, _, nz = grid.shape
+        field2 = ndimage.gaussian_filter(rng.normal(size=(nx, nz)), scale_mm / grid.spacing, mode="wrap")
+        field2 /= field2.std() + 1e-9
+        return field2[:, None, :].astype(np.float32)
+
+    def _apply_windows(self, f: Fields, windows: dict):
+        X, _, Z = self._grid_xyz(f.grid)
+        for name, win in windows.items():
+            if name not in f.volumes:
+                continue
+            a, b = win.radii
+            cx, cz = win.center
+            e = (np.sqrt(((X - cx) / a) ** 2 + ((Z - cz) / b) ** 2) - 1.0) * min(a, b)
+            e = e + win.ragged * (self._noise2d(f.grid, 3.0, win.seed)
+                                  + 0.35 * self._noise2d(f.grid, 0.8, win.seed + 99))
+            f.volumes[name] = np.maximum(f.volumes[name], -e)
+
+    def _add_fat_lobules(self, f: Fields, seed: int = 3):
+        """Fat lobules separated by fibrous septa: Voronoi relief on the adipose layers."""
+        from scipy.spatial import cKDTree
+        rng = np.random.default_rng(seed)
+        g = f.grid
+        lo, hi = g.origin, g.origin + g.spacing * (np.array(g.shape) - 1)
+        for name, cell, amp in (("superficial_fat", 2.2, 0.32), ("deep_fat", 1.8, 0.25)):
+            vol = f.volumes.get(name)
+            if vol is None:
+                continue
+            n_seeds = int(np.prod(hi - lo) / cell ** 3)
+            tree = cKDTree(rng.uniform(lo, hi, size=(n_seeds, 3)))
+            idx = np.nonzero(np.abs(vol) < 1.2)
+            pts = np.stack([g.origin[i] + g.spacing * idx[i] for i in range(3)], axis=1)
+            d, _ = tree.query(pts, k=2, workers=-1)
+            edge = np.clip((d[:, 1] - d[:, 0]) / (0.45 * cell), 0.0, 1.0)
+            vol[idx] -= (amp * np.sqrt(edge)).astype(np.float32)
+
+    def _drape(self, f: Fields) -> np.ndarray:
+        """Fenestrated dissection drape lying on the face around the operative field."""
+        lm = self.lm
+        X, _, Z = self._grid_xyz(f.grid)
+        S = f.skin_n
+        folds = 1.4 * np.abs(self._noise2d(f.grid, 7.0, 11)) + 0.5 * self._noise2d(f.grid, 2.5, 12)
+        cz = 0.5 * (lm.nasion[2] + lm.subnasale[2]) - 2.0
+        a, b = self.alar_half + 9.0, 0.5 * (lm.nasion[2] - lm.subnasale[2]) + 17.0
+        e = (np.sqrt((X / a) ** 2 + ((Z - cz) / b) ** 2) - 1.0) * a
+        e = e + 1.2 * self._noise2d(f.grid, 5.0, 13)
+        lift = 1.2 + folds + 0.06 * np.clip(e, 0, None)     # the drape rises away from the opening
+        shell = np.maximum(lift - S, S - (lift + 0.9))
+        return np.maximum(shell, -e)
 
     @staticmethod
     def _exact_distance(field, h):
@@ -343,9 +414,17 @@ class NoseModel:
         half_w = (self.alar_half - 4.0) * np.sqrt(1.0 - u ** 2) * (1.0 - 0.5 * u) + 3.0
         aperture = _vmax([absx - half_w, z_floor - Z, Z - z_top])
 
-        # Bone: nasal bones, frontal processes of the maxillae and facial skeleton.
+        # Nasal cavity: behind the piriform aperture and, higher up, under the nasal bones.
+        cav_top = lm.nasion[2] - 6.0
+        upper_cav = _vmax([absx - (5.0 + 0.12 * (lm.rhinion[2] - Z).clip(0)), Z - cav_top,
+                           lm.rhinion[2] - Z - 2.0])
+        cavity = np.minimum(aperture, upper_cav)
+
+        # Bone: nasal bones and frontal processes as a cortical shell over the cavity, the rest of
+        # the facial skeleton (frontal bone, maxillae) solid so that sections look like sections.
         bone_shell = np.maximum(outer, -(outer + bone_t))
-        vols["bone"] = _vmax([bone_shell, -aperture, (lm.face_y - 9.0) - Y])
+        shell = _vmax([bone_shell, -aperture, (lm.face_y - 9.0) - Y])
+        vols["bone"] = np.minimum(shell, np.maximum(outer, -cavity))
 
         # Upper lateral cartilages: from under the nasal bones (keystone overlap) to the scroll.
         cart_shell = np.maximum(outer, -(outer + cart_t))
@@ -357,12 +436,12 @@ class NoseModel:
         T_ = lm.pronasale
         band = np.full(X.shape, np.inf, np.float32)
         for s_ in (1.0, -1.0):
-            a2 = np.array([s_ * 3.5, T_[2] + 0.5])
-            b2 = np.array([s_ * (self.alar_half - 5.5), sn[2] + 15.0])
+            a2 = np.array([s_ * 3.0, T_[2] + 3.0])
+            b2 = np.array([s_ * (self.alar_half - 5.0), sn[2] + 17.5])
             ab = b2 - a2
             px, pz = X - a2[0], Z - a2[1]
             hh = np.clip((px * ab[0] + pz * ab[1]) / float(ab @ ab), 0.0, 1.0)
-            dist = np.sqrt((px - hh * ab[0]) ** 2 + (pz - hh * ab[1]) ** 2) - (4.8 - 0.8 * hh)
+            dist = np.sqrt((px - hh * ab[0]) ** 2 + (pz - hh * ab[1]) ** 2) - (6.2 - 1.6 * hh)
             band = np.minimum(band, dist)
         band = _vmax([band, (lm.face_y + 3.0) - Y, (sn[2] + 7.0) - Z])
         llc = _vmax([cart_shell, band, nose_mask * 0.6])
@@ -377,6 +456,16 @@ class NoseModel:
         septum_region = _vmax([(t_r - 0.18 - t) * L, (t - 0.97) * L, (sn[2] + 3.0) - Z,
                                            (lm.face_y - 6.0) - Y])
         vols["septum"] = _vmax([absx - 0.9, outer + 0.4, septum_region, S + 1.0])
+
+        # Respiratory mucosa: lines the inner surface of the framework and both faces of the septum.
+        inner = outer + np.where(t < t_r, bone_t, cart_t)
+        lining = _vmax([-inner, inner + 1.3, cavity + 0.5, (lm.face_y - 6.0) - Y])
+        septal_region = _vmax([(t_r - 0.18 - t) * L, (sn[2] + 3.0) - Z, outer + 0.9, S + 1.0, cavity - 0.5])
+        septal = _vmax([np.abs(absx - 1.45) - 0.55, septal_region])
+        # bony septum (perpendicular plate of the ethmoid / vomer) behind the cartilage
+        bony_septum = _vmax([absx - 0.9, septal_region, Y - (lm.face_y - 5.5)])
+        vols["bone"] = np.minimum(vols["bone"], bony_septum)
+        vols["mucosa"] = np.minimum(lining, septal)
 
         if B is not None:
             fill = np.maximum(B, -outer)
