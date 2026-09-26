@@ -1,0 +1,147 @@
+{
+  "image": "cadavere_filler_sagittale.png",
+  "seg": "cadavere_filler_sagittale_seg.png",
+  "depth": "cadavere_filler_sagittale_depth.png",
+  "edges": "cadavere_filler_sagittale_edges.png",
+  "prompt": "macro photograph of a fresh-frozen human cadaver dissection, sagittal hemisection: supraperiosteal filler, nose, sagittal hemisection, pale cadaveric skin with pores and fine wrinkles, white dense dermis at the incision margin, bright yellow lobulated subcutaneous fat with thin fibrous septa, cut surface of yellow fat lobules, dark red nasal SMAS muscle fibres (procerus, transverse nasalis) under thin fascia, cut muscle, pale yellow deep fatty layer, glistening, ivory nasal bone covered by periosteum, sawn cancellous bone with red marrow, pearly bluish translucent hyaline cartilage with perichondrium, cut hyaline cartilage, moist pink-red nasal mucosa, clear translucent hyaluronic acid gel bolus, anatomy atlas photograph, wet glistening tissue, ring flash, 100mm macro lens, f/11, extremely detailed, sharp focus, natural colours",
+  "negative_prompt": "illustration, drawing, cartoon, CGI, 3d render, plastic, wax, toy, smooth, blurry, text, watermark, labels, gloves, instruments, extra nose, deformed anatomy, oversaturated",
+  "title": "Emisezione sagittale: filler sopraperiosteo",
+  "labels_px": [
+    [
+      "Filler (piano sopraperiosteo)",
+      [
+        416.8673574924469,
+        357.8548973798752,
+        0.25555557012557983
+      ]
+    ],
+    [
+      "Cute",
+      [
+        581.0969412326813,
+        589.7831806540489,
+        0.2520555853843689
+      ]
+    ],
+    [
+      "SMAS nasale (strato fibromuscolare)",
+      [
+        497.3434805870056,
+        446.9133096933365,
+        0.25155556201934814
+      ]
+    ],
+    [
+      "Osso nasale",
+      [
+        443.01137924194336,
+        405.6967216730118,
+        0.25155556201934814
+      ]
+    ],
+    [
+      "Strato adiposo profondo",
+      [
+        421.70622646808624,
+        351.8854892253876,
+        0.25255557894706726
+      ]
+    ],
+    [
+      "Nasion",
+      [
+        446.3807702064514,
+        261.2497869133949,
+        0.25555557012557983
+      ]
+    ]
+  ],
+  "footer_refs": [
+    "Vasconcelos-Berg et al. 2024",
+    "Alfertshofer et al. 2022",
+    "Ortiz 2025",
+    "Beleznay et al. 2015"
+  ],
+  "segments": {
+    "background": [
+      0,
+      0,
+      0
+    ],
+    "skin": [
+      230,
+      190,
+      170
+    ],
+    "skin_cut": [
+      255,
+      240,
+      225
+    ],
+    "superficial_fat": [
+      250,
+      200,
+      60
+    ],
+    "deep_fat": [
+      255,
+      225,
+      120
+    ],
+    "fat_cut": [
+      240,
+      180,
+      40
+    ],
+    "smas": [
+      150,
+      30,
+      25
+    ],
+    "smas_cut": [
+      120,
+      20,
+      20
+    ],
+    "bone": [
+      235,
+      225,
+      200
+    ],
+    "bone_cut": [
+      210,
+      170,
+      140
+    ],
+    "cartilage": [
+      180,
+      200,
+      230
+    ],
+    "cartilage_cut": [
+      200,
+      220,
+      245
+    ],
+    "mucosa": [
+      190,
+      70,
+      80
+    ],
+    "filler": [
+      120,
+      190,
+      255
+    ],
+    "artery": [
+      255,
+      0,
+      0
+    ],
+    "drape": [
+      20,
+      110,
+      110
+    ]
+  }
+}
