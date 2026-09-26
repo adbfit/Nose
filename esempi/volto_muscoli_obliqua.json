@@ -1,0 +1,284 @@
+{
+  "plate": "volto_muscoli",
+  "view": "obliqua",
+  "image": "volto_muscoli_obliqua.png",
+  "anatomy_source": "BodyParts3D, (c) The Database Center for Life Science, licensed under CC Attribution-Share Alike 2.1 Japan",
+  "structures": {
+    "FMA7163": "Cute",
+    "FMA71098": "Sopracciglia",
+    "FMA52734": "Osso frontale",
+    "FMA53647": "Osso nasale destro",
+    "FMA53648": "Osso nasale sinistro",
+    "FMA53649": "Mascella destra",
+    "FMA53650": "Mascella sinistra",
+    "FMA52892": "Osso zigomatico destro",
+    "FMA52893": "Osso zigomatico sinistro",
+    "FMA52748": "Mandibola",
+    "FMA53645": "Osso lacrimale destro",
+    "FMA53646": "Osso lacrimale sinistro",
+    "FMA52740": "Etmoide",
+    "FMA52736": "Sfenoide",
+    "FMA9710": "Vomere",
+    "FMA53655": "Osso palatino destro",
+    "FMA53656": "Osso palatino sinistro",
+    "FMA54737": "Cornetto inferiore destro",
+    "FMA54738": "Cornetto inferiore sinistro",
+    "FMA71704": "Cartilagini nasali",
+    "FMA12513": "Bulbo oculare",
+    "FMA46759": "M. frontale destro",
+    "FMA46760": "M. frontale sinistro",
+    "FMA46796": "M. corrugatore destro",
+    "FMA46797": "M. corrugatore sinistro",
+    "FMA55610": "M. procero destro",
+    "FMA55611": "M. procero sinistro",
+    "FMA55606": "M. nasale destro",
+    "FMA55607": "M. nasale sinistro",
+    "FMA55608": "M. depressore del setto destro",
+    "FMA55609": "M. depressore del setto sinistro",
+    "FMA46782": "M. orbicolare dell'occhio, parte orbitale dx",
+    "FMA46783": "M. orbicolare dell'occhio, parte orbitale sx",
+    "FMA46785": "M. orbicolare dell'occhio, parte palpebrale dx",
+    "FMA46786": "M. orbicolare dell'occhio, parte palpebrale sx",
+    "FMA46803": "M. elevatore del labbro sup. e dell'ala del naso dx",
+    "FMA46804": "M. elevatore del labbro sup. e dell'ala del naso sx",
+    "FMA46806": "M. elevatore del labbro superiore dx",
+    "FMA46807": "M. elevatore del labbro superiore sx",
+    "FMA46812": "M. grande zigomatico dx",
+    "FMA46813": "M. grande zigomatico sx",
+    "FMA46814": "M. piccolo zigomatico dx",
+    "FMA46815": "M. piccolo zigomatico sx",
+    "FMA46839": "M. risorio dx",
+    "FMA46840": "M. risorio sx",
+    "FMA46841": "M. orbicolare della bocca",
+    "FMA46829": "M. depressore dell'angolo della bocca dx",
+    "FMA46830": "M. depressore dell'angolo della bocca sx",
+    "FMA46817": "M. depressore del labbro inferiore dx",
+    "FMA46818": "M. depressore del labbro inferiore sx",
+    "FMA46826": "M. mentale dx",
+    "FMA46827": "M. mentale sx",
+    "FMA46835": "M. buccinatore dx",
+    "FMA46836": "M. buccinatore sx",
+    "FMA49001": "M. massetere, parte superficiale dx",
+    "FMA49002": "M. massetere, parte superficiale sx",
+    "FMA55680": "Dente",
+    "FMA55681": "Dente",
+    "FMA55682": "Dente",
+    "FMA55683": "Dente",
+    "FMA55798": "Dente",
+    "FMA55799": "Dente",
+    "FMA55688": "Dente",
+    "FMA55689": "Dente",
+    "FMA55690": "Dente",
+    "FMA55691": "Dente",
+    "FMA55697": "Dente",
+    "FMA55698": "Dente",
+    "FMA55699": "Dente",
+    "FMA55700": "Dente",
+    "FMA57140": "Dente",
+    "FMA57141": "Dente",
+    "FMA57142": "Dente",
+    "FMA57143": "Dente",
+    "FMA55686": "Dente",
+    "FMA55687": "Dente",
+    "FMA55692": "Dente",
+    "FMA55693": "Dente",
+    "FMA55694": "Dente",
+    "FMA55695": "Dente",
+    "FMA55703": "Dente",
+    "FMA55704": "Dente",
+    "FMA55705": "Dente",
+    "FMA55706": "Dente"
+  },
+  "landmarks_mm": {
+    "nasion": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "pronasale": [
+      -1.11,
+      26.2,
+      -40.44
+    ],
+    "subnasale": [
+      0.0,
+      -14.03,
+      -53.0
+    ],
+    "canto_mediale_sx": [
+      11.83,
+      -24.51,
+      -8.67
+    ],
+    "centro_occhio_sx": [
+      27.08,
+      -26.09,
+      -8.72
+    ],
+    "canto_mediale_dx": [
+      -13.14,
+      -24.51,
+      -8.91
+    ],
+    "centro_occhio_dx": [
+      -28.62,
+      -26.01,
+      -8.78
+    ],
+    "commissura_sx": [
+      30.42,
+      -19.65,
+      -65.49
+    ],
+    "commissura_dx": [
+      -31.72,
+      -19.65,
+      -65.64
+    ],
+    "incisura_facciale_sx": [
+      27.6,
+      -40.31,
+      -91.36
+    ],
+    "incisura_facciale_dx": [
+      -29.2,
+      -40.37,
+      -91.3
+    ],
+    "sopratrocleare_sx": [
+      15.37,
+      -9.84,
+      10.35
+    ],
+    "sopraorbitario_sx": [
+      28.86,
+      -11.92,
+      12.99
+    ],
+    "sopratrocleare_dx": [
+      -15.44,
+      -11.09,
+      9.66
+    ],
+    "sopraorbitario_dx": [
+      -28.74,
+      -11.05,
+      13.4
+    ],
+    "base_alare_sx": [
+      22.69,
+      -14.61,
+      -47.44
+    ],
+    "base_alare_dx": [
+      -23.2,
+      -12.63,
+      -49.54
+    ]
+  },
+  "arteries": [
+    {
+      "name": "facciale_sx",
+      "evidence": "Trzeciak 2025; Pourani 2025",
+      "radius_mm": 0.78
+    },
+    {
+      "name": "labiale_superiore_sx",
+      "evidence": "course: Scheuer 2017; depth illustrative",
+      "radius_mm": 0.55
+    },
+    {
+      "name": "labiale_inferiore_sx",
+      "evidence": "course: Scheuer 2017; depth illustrative",
+      "radius_mm": 0.55
+    },
+    {
+      "name": "nasale_laterale_sx",
+      "evidence": "diameter 1.0 mm: Jiang 2020",
+      "radius_mm": 0.44
+    },
+    {
+      "name": "dorsale_naso_sx",
+      "evidence": "bilateral pattern 53.3%: Tansatit 2021",
+      "radius_mm": 0.39
+    },
+    {
+      "name": "sopratrocleare_sx",
+      "evidence": "depth: Cotofana 2020; distance from midline: Kliniec 2024",
+      "radius_mm": 0.41
+    },
+    {
+      "name": "sopraorbitario_sx",
+      "evidence": "depth: Cotofana 2020; distance from midline: Kliniec 2024",
+      "radius_mm": 0.45
+    },
+    {
+      "name": "facciale_dx",
+      "evidence": "Trzeciak 2025; Pourani 2025",
+      "radius_mm": 0.78
+    },
+    {
+      "name": "labiale_superiore_dx",
+      "evidence": "course: Scheuer 2017; depth illustrative",
+      "radius_mm": 0.55
+    },
+    {
+      "name": "labiale_inferiore_dx",
+      "evidence": "course: Scheuer 2017; depth illustrative",
+      "radius_mm": 0.55
+    },
+    {
+      "name": "nasale_laterale_dx",
+      "evidence": "diameter 1.0 mm: Jiang 2020",
+      "radius_mm": 0.44
+    },
+    {
+      "name": "dorsale_naso_dx",
+      "evidence": "bilateral pattern 53.3%: Tansatit 2021",
+      "radius_mm": 0.39
+    },
+    {
+      "name": "sopratrocleare_dx",
+      "evidence": "depth: Cotofana 2020; distance from midline: Kliniec 2024",
+      "radius_mm": 0.41
+    },
+    {
+      "name": "sopraorbitario_dx",
+      "evidence": "depth: Cotofana 2020; distance from midline: Kliniec 2024",
+      "radius_mm": 0.45
+    }
+  ],
+  "references": {
+    "bodyparts3d": {
+      "citation": "BodyParts3D, (c) The Database Center for Life Science, CC BY-SA 2.1 JP. Anatomical meshes of skin, skeleton, cartilage and muscles.",
+      "pmid": "-"
+    },
+    "trzeciak2025": {
+      "citation": "Trzeciak M, Ostrowski P, Gladysz T, et al. The depth of the facial artery, meta-analysis. Aesthetic Plast Surg. 2025;49(13):3793-3802.",
+      "pmid": "40164893",
+      "doi": "10.1007/s00266-025-04833-9"
+    },
+    "pourani2025": {
+      "citation": "Pourani MR, Ebrahimzade M, Goudarzi E, et al. Evaluation of facial artery course variations, diameters, and depth using Doppler ultrasonography: a systematic review and meta-analysis. J Cosmet Dermatol. 2025;24(9):e70431.",
+      "pmid": "40874402",
+      "doi": "10.1111/jocd.70431"
+    },
+    "cotofana2020": {
+      "citation": "Cotofana S, Alfertshofer M, Frank K, et al. Relationship between vertical glabellar lines and the supratrochlear and supraorbital arteries. Aesthet Surg J. 2020;40(12):1341-1348.",
+      "pmid": "32469392",
+      "doi": "10.1093/asj/sjaa138"
+    },
+    "kliniec2024": {
+      "citation": "Kliniec K, Domagala Z, Kempisty B, Szepietowski JC. Arterial vascularization of the forehead in aesthetic dermatology procedures: a review. J Clin Med. 2024;13(14):4238.",
+      "pmid": "39064278",
+      "doi": "10.3390/jcm13144238"
+    },
+    "scheuer2017": {
+      "citation": "Scheuer JF 3rd, Sieber DA, Pezeshk RA, et al. Facial danger zones: techniques to maximize safety during soft-tissue filler injections. Plast Reconstr Surg. 2017;139(5):1103-1108.",
+      "pmid": "28445360",
+      "doi": "10.1097/PRS.0000000000003309"
+    }
+  },
+  "derived_layers": "dermis 1.8 mm; subcutaneous fat = space between dermis and muscles/bone (max 20 mm), computed volumetrically",
+  "disclaimer": "Ricostruzione: anatomia da BodyParts3D (un individuo), arterie tracciate secondo i dati di letteratura citati. Non è la fotografia di un preparato."
+}

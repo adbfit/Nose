@@ -1,0 +1,221 @@
+{
+  "image": "volto_muscoli_obliqua.png",
+  "seg": "volto_muscoli_obliqua_seg.png",
+  "depth": "volto_muscoli_obliqua_depth.png",
+  "edges": "volto_muscoli_obliqua_edges.png",
+  "prompt": "macro photograph of a fresh-frozen human cadaver dissection, facial dissection: muscular plane and arteries, whole face, human face, three-quarter oblique view, pale cadaveric skin with pores and fine wrinkles, white dense dermis at the incision margin, bright yellow lobulated subcutaneous fat with thin fibrous septa, cut surface of yellow fat lobules, dark red nasal SMAS muscle fibres (procerus, transverse nasalis) under thin fascia, ivory nasal bone covered by periosteum, teal surgical drape, red latex-injected arteries, anatomy atlas photograph, wet glistening tissue, ring flash, 100mm macro lens, f/11, extremely detailed, sharp focus, natural colours",
+  "negative_prompt": "illustration, drawing, cartoon, CGI, 3d render, plastic, wax, toy, smooth, blurry, text, watermark, labels, gloves, instruments, extra nose, deformed anatomy, oversaturated",
+  "title": "Dissezione del volto: piano muscolare e arterie",
+  "labels_px": [
+    [
+      "A. facciale",
+      [
+        451.1472225189209,
+        798.4455800056458,
+        0.6422497034072876
+      ]
+    ],
+    [
+      "A. labiale",
+      [
+        530.8473497629166,
+        835.908408164978,
+        0.6408140063285828
+      ]
+    ],
+    [
+      "A. sopratrocleare",
+      [
+        512.3249769210815,
+        317.50465393066406,
+        0.6286976933479309
+      ]
+    ],
+    [
+      "A. sopraorbitaria",
+      [
+        452.1733492612839,
+        319.0021347999573,
+        0.6233530640602112
+      ]
+    ],
+    [
+      "A. nasale laterale",
+      [
+        595.8362400531769,
+        739.5773828029633,
+        0.6340624690055847
+      ]
+    ],
+    [
+      "M. frontale",
+      [
+        375.82264840602875,
+        265.91036796569824,
+        0.621697723865509
+      ]
+    ],
+    [
+      "M. procero",
+      [
+        503.91494035720825,
+        398.83156299591064,
+        0.6331459283828735
+      ]
+    ],
+    [
+      "M. nasale",
+      [
+        579.5528173446655,
+        597.7909326553345,
+        0.638161838054657
+      ]
+    ],
+    [
+      "M. orbicolare dell'occhio, parte orbitale",
+      [
+        380.38227558135986,
+        537.2961044311523,
+        0.6277791857719421
+      ]
+    ],
+    [
+      "M. elevatore del labbro sup. e dell'ala del naso",
+      [
+        504.857012629509,
+        652.4468994140625,
+        0.6418063044548035
+      ]
+    ],
+    [
+      "M. grande zigomatico",
+      [
+        299.2393225431442,
+        708.3654534816742,
+        0.6327459812164307
+      ]
+    ],
+    [
+      "M. orbicolare della bocca",
+      [
+        517.5762176513672,
+        846.1045038700104,
+        0.6459957957267761
+      ]
+    ],
+    [
+      "M. depressore dell'angolo della bocca",
+      [
+        393.52250695228577,
+        901.6265988349915,
+        0.6456965804100037
+      ]
+    ],
+    [
+      "M. massetere, parte superficiale",
+      [
+        135.98789647221565,
+        708.5056579113007,
+        0.6474935412406921
+      ]
+    ],
+    [
+      "M. corrugatore",
+      [
+        448.69138300418854,
+        403.22927713394165,
+        0.6288399696350098
+      ]
+    ]
+  ],
+  "footer_refs": [
+    "BodyParts3D (DBCLS)",
+    "Trzeciak et al. 2025",
+    "Pourani et al. 2025",
+    "Cotofana et al. 2020",
+    "Kliniec et al. 2024",
+    "Scheuer et al. 2017"
+  ],
+  "segments": {
+    "background": [
+      0,
+      0,
+      0
+    ],
+    "skin": [
+      230,
+      190,
+      170
+    ],
+    "skin_cut": [
+      255,
+      240,
+      225
+    ],
+    "superficial_fat": [
+      250,
+      200,
+      60
+    ],
+    "deep_fat": [
+      255,
+      225,
+      120
+    ],
+    "fat_cut": [
+      240,
+      180,
+      40
+    ],
+    "smas": [
+      150,
+      30,
+      25
+    ],
+    "smas_cut": [
+      120,
+      20,
+      20
+    ],
+    "bone": [
+      235,
+      225,
+      200
+    ],
+    "bone_cut": [
+      210,
+      170,
+      140
+    ],
+    "cartilage": [
+      180,
+      200,
+      230
+    ],
+    "cartilage_cut": [
+      200,
+      220,
+      245
+    ],
+    "mucosa": [
+      190,
+      70,
+      80
+    ],
+    "filler": [
+      120,
+      190,
+      255
+    ],
+    "artery": [
+      255,
+      0,
+      0
+    ],
+    "drape": [
+      20,
+      110,
+      110
+    ]
+  }
+}

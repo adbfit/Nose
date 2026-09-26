@@ -6,3 +6,4 @@
 - [cadavere_strati_obliqua](cadavere_strati_obliqua/ISTRUZIONI.md)
 - [volto_emidissezione_frontale](volto_emidissezione_frontale/ISTRUZIONI.md)
 - [volto_emidissezione_obliqua](volto_emidissezione_obliqua/ISTRUZIONI.md)
+- [volto_muscoli_obliqua](volto_muscoli_obliqua/ISTRUZIONI.md)
