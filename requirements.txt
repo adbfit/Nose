@@ -1,0 +1,8 @@
+# Blender come modulo Python (richiede Python 3.11 per bpy 4.2)
+bpy==4.2.0
+numpy
+scipy
+scikit-image
+pyyaml
+pillow
+pytest
