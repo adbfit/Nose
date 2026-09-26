@@ -1,0 +1,22 @@
+{
+  "name": "nose-marketplace",
+  "description": "Marketplace di esempio per distribuire il plugin Reel Scientifici",
+  "owner": {
+    "name": "Alberto Di Bartolomeo",
+    "email": "albertodibartolomeo94@gmail.com"
+  },
+  "plugins": [
+    {
+      "name": "reel-scientifici",
+      "source": "./plugins/reel-scientifici",
+      "description": "Orchestratore /reel: script per reel scientifici con tono da persona vera, dalla ricerca alla regia.",
+      "relevance": {
+        "topic": "Reel scientifici",
+        "signals": {
+          "cwd": ["reels", "reels/**"],
+          "filesRead": ["**/00-brief.md", "**/REEL.md"]
+        }
+      }
+    }
+  ]
+}

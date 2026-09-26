@@ -1,0 +1,24 @@
+{
+  "name": "reel-scientifici",
+  "displayName": "Reel Scientifici",
+  "version": "0.1.0",
+  "description": "Orchestratore /reel: trasforma studi scientifici in script per reel (Instagram/TikTok/Shorts) con tono da persona vera, tramite 6 subagent con cancelli di qualità.",
+  "author": {
+    "name": "Alberto Di Bartolomeo",
+    "email": "albertodibartolomeo94@gmail.com"
+  },
+  "repository": "https://github.com/adbfit/Nose",
+  "license": "MIT",
+  "keywords": [
+    "reel",
+    "social media",
+    "content creator",
+    "instagram",
+    "tiktok",
+    "divulgazione scientifica",
+    "medicina estetica",
+    "marketing",
+    "video script"
+  ],
+  "defaultEnabled": true
+}
